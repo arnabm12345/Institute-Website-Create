@@ -12,11 +12,10 @@ import Signup from './SignUp';
 import NotFound from './Page404';
 
 function App() {
-
   return (
     <Router>
       <div>
-        <Navbar/>
+        <Navbar />
     <Routes>
       <Route exact path="/" element={<Home/>} />
       <Route path="/login" element={<Login/>} />

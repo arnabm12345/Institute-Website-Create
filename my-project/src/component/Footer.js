@@ -7,6 +7,8 @@ const Footer = () => {
         <p className="footer-copyright">
           © 2023 Company Name. All rights reserved.
         </p>
+        </div>
+        <div className="footer-container">
         <p className="footer-developed-by">
           Developed by: Arnab Mondal
         </p>
