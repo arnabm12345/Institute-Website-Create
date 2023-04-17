@@ -10,6 +10,7 @@ import Home from './Home';
 import Login from './Login';
 import Signup from './SignUp';
 import NotFound from './Page404';
+import Authenticated from './Authenticated';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/" element={<Home/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/signup" element={<Signup/>} />
+      <Route path="/authenticated" element={<Authenticated/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>
     <Footer/>

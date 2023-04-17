@@ -47,13 +47,13 @@ code {
   color: #fff;
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-between;
+  justify-content: space-around;
 }
 
 .footer-container {
   display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 12000px;
+ 
 }
 
 .footer-copyright {
@@ -357,3 +357,7 @@ a {
 .col-md-6.col-lg-5.d-none.d-md-block{
   padding-top: 1rem;
 }
+
+
+/*Dropdown Menu */
+
