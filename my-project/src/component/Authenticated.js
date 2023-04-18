@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import SessionTable from './sessionTableUser';
 import axios from 'axios';
 import Navbars from './Navbar';
 
@@ -44,13 +45,13 @@ function Authenticated() {
     
   }, [navigate]);
 
-  const handleLogout = () => {
+ /* const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expiryDate');
     localStorage.removeItem('userId'); 
     navigate('/login'); // Redirect to login page after logout
   };
-
+*/
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -58,8 +59,9 @@ function Authenticated() {
   var w=window.innerWidth;
   return (
 
-    <div style={{height:`${0.9*h}px`}} >
-       
+    <div style={{minHeight:`${0.9*h}px`}} >
+
+     <SessionTable/>  
     <Navbar className="navbar navbar-dark bg-dark" bg="light" expand="md" style={{justifyContent:'space-between'}}>
      
       
@@ -176,7 +178,7 @@ function Authenticated() {
 
       <h1>Welcome,{user.Username}</h1>
       <p>You have been verified!</p>
-      <button onClick={handleLogout}>Logout</button>
+      
 
     </div>
   );
