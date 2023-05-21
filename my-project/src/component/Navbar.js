@@ -11,7 +11,7 @@ const Navbar = () => {
       fetchData();
     }
     getAddress();
-    console.log(Address);
+   // console.log(Address);
     
   }, []);
 

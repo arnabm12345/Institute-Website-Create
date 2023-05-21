@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate  } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import SessionTable from './sessionTableUser';
-import axios from 'axios';
-import Navbars from './Navbar';
+import NavbarAuthenticated from './NavbarAuthenticated';
+import { useNavigate } from 'react-router-dom';
+
 
 function Authenticated() {
+ 
+
   const [user, setUser] = useState(null);
   const navigate  = useNavigate ();
+  
 
   useEffect(() => {
+   
     const token = localStorage.getItem('token');
     if (!token) {
-        console.log('return from the Auhenticate file');
+        //console.log('return from the Auhenticate file');
         navigate('/login'); // Redirect to login page if user is not logged in
       } 
       
@@ -30,13 +32,13 @@ function Authenticated() {
           })
           .then((data) => {
             setUser(data);
-            console.log(data);
+          //  console.log(data);
             /*  if (!response.data.verified) {
               navigate('/unverified'); // Redirect to unverified page if user is not verified
             }*/
           })
           .catch((error) => {
-            console.log(error);
+           // console.log(error);
             navigate('/login'); // Redirect to login page if there is an error
           });
 
@@ -56,124 +58,12 @@ function Authenticated() {
     return <div>Loading...</div>;
   }
   var h = window.innerHeight;
-  var w=window.innerWidth;
+  //var w=window.innerWidth;
   return (
 
     <div style={{minHeight:`${0.9*h}px`}} >
 
-     <SessionTable/>  
-    <Navbar className="navbar navbar-dark bg-dark" bg="light" expand="md" style={{justifyContent:'space-between'}}>
-     
-      
-        <Nav className="ml-auto" >
-     
-          <NavDropdown title="Administration" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-          
-        
-          <NavDropdown title="Master Creation" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-
-          
-          <NavDropdown title="Admission" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-          <NavDropdown title="Report" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-          <NavDropdown title="Fees" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-          <NavDropdown title="Report" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-          <NavDropdown title="Asset/stock" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-
-          
-          <NavDropdown title="Report" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-
-          
-          <NavDropdown title="Accounts" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-
-          
-          <NavDropdown title="Reports" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-          <NavDropdown title="Payroll" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-          <NavDropdown title="Library" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          <NavDropdown title="Others" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          <NavDropdown title="My Account" id="nav-dropdown" style={{fontSize:'small' }}>
-            <NavDropdown.Item href="#">Menu Item 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Menu Item 3</NavDropdown.Item>
-          </NavDropdown>
-
-          
-    
-
-        
-
-        </Nav>
-      
-    </Navbar>
+     <NavbarAuthenticated />
         
 
       <h1>Welcome,{user.Username}</h1>

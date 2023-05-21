@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate  } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError,setShowError]=useState(false);
+  const [session,setSession]=useState('2022-2023');
+  const [login,setLogin]=useState(false);
+  
 
   const navigate = useNavigate();
 const setAutoLogout = milliseconds => {
@@ -21,12 +24,14 @@ const  logoutHandler = () => {
   };
 
   useEffect(() => {
+    
     const token = localStorage.getItem('token');
 
-    if (token) {
-      navigate('/authenticated'); // Redirect to authenticated page if user is already logged in
+    if (token ) {
+      navigate('/authenticated',
+      { state: { session } }); // Redirect to authenticated page if user is already logged in
     }
-  }, [navigate]);
+  }, []);
 
   const handleLogin = async () => {
       const response = await fetch('http://localhost:3000/login', {
@@ -40,31 +45,34 @@ const  logoutHandler = () => {
       .then(res => {
         console.log(res.status);
         if (res.status === 200) {
+          setLogin(true);
           return res.json();
+          
         }
         setShowError(true);
         setEmail('');
         setPassword('');
+        setLogin(false);
         throw new Error('Validation failed.');
       })
 
       .then(resData => {
         localStorage.setItem('token', resData.token);
         localStorage.setItem('userId', resData.id);
-        console.log('Logged in successfully');
+       // console.log('Logged in successfully');
         const remainingMilliseconds = 60 * 60 * 1000;
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
         );
         localStorage.setItem('expiryDate', expiryDate.toISOString());
         setAutoLogout(remainingMilliseconds);
-        navigate('/authenticated'); // Redirect to authenticated page after successful login
+        navigate('/authenticated', { state: { session } }); // Redirect to authenticated page after successful login
 
       })
       //console.log("Send request Successfully to backend ");
     
       .catch(err => {
-        console.log(err);
+        //console.log(err);
       });
   };
 
@@ -88,7 +96,18 @@ const  logoutHandler = () => {
 
                   <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing:'1px'}} >Sign into your account</h5>
 
-                  <div className="form-outline mb-4">
+                  
+         <label for="session" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Your Session</label>
+            <select id="sessions" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+             dark:focus:ring-blue-500 dark:focus:border-blue-500" value={session} onChange={(e) => setSession(e.target.value)}>
+             
+             <option>Session</option>
+             <option>2023-2024</option>
+             <option>2022-2023</option>
+             <option>2021-2022</option>
+             </select>
+
+                  <div className="form-outline mb-4" style={{paddingTop:'1.0rem'}}>
                     <input type="email" id="form2Example17" className="form-control form-control-lg" value={email} onChange={(e) => setEmail(e.target.value)}  />
                     <label className="form-label" htmlFor="form2Example17">Username</label>
                   </div>
@@ -101,11 +120,10 @@ const  logoutHandler = () => {
                   <div className="pt-1 mb-4">
                     <button className="btn btn-dark btn-lg btn-block" type="button" onClick={handleLogin}>Login</button>
                   </div>
-
-                  <a className="small text-muted" href="#!">Forgot password?</a>
-                  
+                  <Link to="/forgot-password">
+                  <p className="small text-muted" href="#!">Forgot password?</p>
+                  </Link>
                 </form>
-
               </div>
             </div>
           </div>
